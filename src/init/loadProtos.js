@@ -39,10 +39,14 @@ export const loadProtos = async () => {
       }
     }
 
-    console.log(protoMessages);
+    // console.log(protoMessages);
 
     console.log("Protobuf 파일이 성공적으로 로드 되었습니다.");
   } catch (err) {
     console.error("Protobuf 파일 로드 중 오류가 발생했습니다: ", err);
   }
+};
+
+export const getProtoMessages = () => {
+  return { ...protoMessages }; // shallow copy
 };
