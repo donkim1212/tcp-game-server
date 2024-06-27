@@ -1,4 +1,4 @@
-import { CLIENT_VERSION, PORT } from "../constants/env.js";
+import { CLIENT_VERSION, PORT, HOST } from "../constants/env.js";
 import { PACKET_TYPE_LENGTH, TOTAL_LENGTH } from "../constants/header.js";
 
 export const config = {
