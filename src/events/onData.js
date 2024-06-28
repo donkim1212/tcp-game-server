@@ -2,6 +2,7 @@ import { config } from "../config/config.js";
 import { PACKET_TYPE } from "../constants/header.js";
 import { getHandlerById } from "../handlers/index.js";
 import { packetParser } from "../lib/utils/parser/packetParser.js";
+import { getUserById } from "../session/user.session.js";
 
 // curring
 export const onData = (socket) => async (data) => {
@@ -25,6 +26,10 @@ export const onData = (socket) => async (data) => {
         break;
       case PACKET_TYPE.NORMAL:
         const { handlerId, userId, payload, sequence } = packetParser(packet);
+        const user = getUserById(userId);
+        if (user && user.sequence !== sequence) {
+          console.error(`잘못된 호출값입니다.`);
+        }
         const handler = getHandlerById(handlerId);
 
         await handler({ socket, userId, payload });
